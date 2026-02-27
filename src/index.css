@@ -1,0 +1,651 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+
+  --color-brand-pink: #FCE7F3; /* Pink-100/200 mix */
+  --color-brand-pink-dark: #FBCFE8;
+  --color-brand-turquoise: #CCFBF1; /* Teal-100/200 mix */
+  --color-brand-turquoise-dark: #99F6E4;
+  --color-brand-text: #4B5563; /* Gray-600 */
+  --color-brand-heading: #1F2937; /* Gray-800 */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-brand-text);
+  background-color: #FAFAF9; /* Stone-50 */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--color-brand-heading);
+}
+
+/* Custom Button Style from Uiverse.io by adamgiebl */
+.btn-custom {
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 16px; /* Adjusted slightly for better fit */
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #ec4899; /* Pink-500 to match brand */
+  background: transparent;
+  cursor: pointer;
+  transition: ease-out 0.5s;
+  border: 2px solid #ec4899;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 0 #ec4899;
+}
+
+.btn-custom:hover {
+  color: white;
+  box-shadow: inset 0 -100px 0 0 #ec4899;
+}
+
+.btn-custom:active {
+  transform: scale(0.9);
+}
+
+/* Review Card Styles adapted from Uiverse.io by eslam-hany */
+.review-card {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 320px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  color: #374151;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.review-card::before,
+.review-card::after {
+  position: absolute;
+  content: "";
+  width: 20%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #ec4899; /* Pink-500 */
+  transition: all 0.5s;
+}
+
+.review-card::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 15px 0 100%;
+}
+
+.review-card::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100%  0 15px;
+}
+
+.review-card:hover::before,
+.review-card:hover:after {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  transition: all 0.5s;
+}
+
+.review-card:hover::after {
+  content: attr(data-review);
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  white-space: normal;
+  line-height: 1.6;
+  z-index: 10;
+}
+
+/* Dark Mode Toggle from Uiverse.io by Shoh2008 */
+.checkbox-wrapper-5 .check {
+  --size: 30px; /* Scaled down slightly for navbar */
+  position: relative;
+  background: linear-gradient(90deg, #f19af3, #f099b5);
+  line-height: 0;
+  perspective: 400px;
+  font-size: var(--size);
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"],
+  .checkbox-wrapper-5 .check label,
+  .checkbox-wrapper-5 .check label::before,
+  .checkbox-wrapper-5 .check label::after,
+  .checkbox-wrapper-5 .check {
+  appearance: none;
+  display: inline-block;
+  border-radius: var(--size);
+  border: 0;
+  transition: .35s ease-in-out;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.checkbox-wrapper-5 .check label {
+  width: calc(2.2 * var(--size));
+  height: var(--size);
+  background: #d7d7d7;
+  overflow: hidden;
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"] {
+  position: absolute;
+  z-index: 1;
+  width: calc(.8 * var(--size));
+  height: calc(.8 * var(--size));
+  top: calc(.1 * var(--size));
+  left: calc(.1 * var(--size));
+  background: linear-gradient(45deg, #dedede, #ffffff);
+  box-shadow: 0 6px 7px rgba(0,0,0,0.3);
+  outline: none;
+  margin: 0;
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"]:checked {
+  left: calc(1.3 * var(--size));
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"]:checked + label {
+  background: transparent;
+}
+
+.checkbox-wrapper-5 .check label::before,
+  .checkbox-wrapper-5 .check label::after {
+  content: "· ·";
+  position: absolute;
+  overflow: hidden;
+  left: calc(.15 * var(--size));
+  top: calc(.5 * var(--size));
+  height: var(--size);
+  letter-spacing: calc(-0.04 * var(--size));
+  color: #9b9b9b;
+  font-family: "Times New Roman", serif;
+  z-index: 2;
+  font-size: calc(.6 * var(--size));
+  border-radius: 0;
+  transform-origin: 0 0 calc(-0.5 * var(--size));
+  backface-visibility: hidden;
+}
+
+.checkbox-wrapper-5 .check label::after {
+  content: "●";
+  top: calc(.65 * var(--size));
+  left: calc(.2 * var(--size));
+  height: calc(.1 * var(--size));
+  width: calc(.35 * var(--size));
+  font-size: calc(.2 * var(--size));
+  transform-origin: 0 0 calc(-0.4 * var(--size));
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"]:checked + label::before,
+  .checkbox-wrapper-5 .check input[type="checkbox"]:checked + label::after {
+  left: calc(1.55 * var(--size));
+  top: calc(.4 * var(--size));
+  line-height: calc(.1 * var(--size));
+  transform: rotateY(360deg);
+}
+
+.checkbox-wrapper-5 .check input[type="checkbox"]:checked + label::after {
+  height: calc(.16 * var(--size));
+  top: calc(.55 * var(--size));
+  left: calc(1.6 * var(--size));
+  font-size: calc(.6 * var(--size));
+  line-height: 0;
+}
+.uiverse-tooltip-container {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+.uiverse-tooltip-trigger {
+  color: #333;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.uiverse-tooltip-trigger:hover {
+  color: #ec4899; /* Brand pink hover */
+}
+
+.uiverse-tooltip-content {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  background: #0b798a;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: opacity 0.3s, visibility 0.3s, top 0.3s, background 0.3s;
+  z-index: 20;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.uiverse-tooltip-content::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  border-width: 8px;
+  border-style: solid;
+  border-color: transparent transparent #0b798a transparent;
+  transform: translateX(-50%);
+}
+
+.uiverse-tooltip-container:hover .uiverse-tooltip-content {
+  top: 120%;
+  opacity: 1;
+  visibility: visible;
+  background: #0e94a0;
+  transform: translate(-50%, -5px);
+}
+ul.example-2 {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.example-2 {
+  display: flex;
+  justify-content: flex-start; /* Changed from center to align with text */
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.icon-content {
+  margin: 0 5px;
+  position: relative;
+}
+.icon-content .tooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 15px;
+  opacity: 0;
+  visibility: hidden;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  z-index: 20;
+}
+.icon-content:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  top: -50px;
+}
+/* Base glassmorphism anchor */
+.icon-content a {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 20%;
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.06)
+  );
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  transition: all 0.35s ease-in-out;
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.45),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.18),
+    0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+/* Spotify glass border */
+.icon-content[data-social="spotify"] a {
+  border: 1px solid rgba(29, 185, 84, 0.6);
+  box-shadow:
+    inset 0 0 6px rgba(29, 185, 84, 0.4),
+    0 0 10px rgba(29, 185, 84, 0.5),
+    0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Pinterest glass border */
+.icon-content[data-social="pinterest"] a {
+  border: 1px solid rgba(189, 8, 28, 0.6);
+  box-shadow:
+    inset 0 0 6px rgba(189, 8, 28, 0.4),
+    0 0 10px rgba(189, 8, 28, 0.5),
+    0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Dribbble glass border */
+.icon-content[data-social="dribbble"] a {
+  border: 1px solid rgba(234, 76, 137, 0.6);
+  box-shadow:
+    inset 0 0 6px rgba(234, 76, 137, 0.4),
+    0 0 10px rgba(234, 76, 137, 0.5),
+    0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Telegram glass border */
+.icon-content[data-social="telegram"] a {
+  border: 1px solid rgba(0, 136, 204, 0.6);
+  box-shadow:
+    inset 0 0 6px rgba(0, 136, 204, 0.4),
+    0 0 10px rgba(0, 136, 204, 0.5),
+    0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Common shine sweep effect */
+.icon-content a::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: rotate(25deg) translateX(-100%);
+  transition: transform 0.8s ease;
+  z-index: 0;
+}
+
+.icon-content a:hover::before {
+  transform: rotate(25deg) translateX(100%);
+}
+
+.icon-content a:hover {
+  box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 50%);
+}
+.icon-content a svg {
+  position: relative;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+}
+.icon-content a:hover {
+  color: white;
+}
+.icon-content a .filled {
+  position: absolute;
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: #000;
+  transition: all 0.3s ease-in-out;
+}
+.icon-content a:hover .filled {
+  height: 100%;
+}
+
+/* Gradient animation keyframes */
+@keyframes premiumGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Common fix for all icons */
+.icon-content a {
+  text-decoration: none; /* underline remove */
+  overflow: hidden; /* prevent overflow */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-content a .filled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  transition: all 0.3s ease-in-out;
+  border-radius: 20%;
+}
+
+/* Spotify – dark premium green gradient */
+.icon-content[data-social="spotify"] a .filled,
+.icon-content[data-social="spotify"] .tooltip {
+  background: linear-gradient(135deg, #0f3d1f, #146b35, #1db954, #0d2916);
+  background-size: 400% 400%;
+  animation: premiumGradient 6s ease infinite;
+  backdrop-filter: blur(12px) saturate(200%);
+  -webkit-backdrop-filter: blur(12px) saturate(200%);
+  border: 1px solid rgba(29, 185, 84, 0.6);
+  box-shadow:
+    inset 0 0 12px rgba(29, 185, 84, 0.5),
+    0 0 24px rgba(29, 185, 84, 0.7);
+}
+
+/* Pinterest – dark premium red gradient */
+.icon-content[data-social="pinterest"] a .filled,
+.icon-content[data-social="pinterest"] .tooltip {
+  background: linear-gradient(135deg, #3d0a0f, #7a0f1c, #bd081c, #4a0b12);
+  background-size: 400% 400%;
+  animation: premiumGradient 6s ease infinite;
+  backdrop-filter: blur(12px) saturate(200%);
+  -webkit-backdrop-filter: blur(12px) saturate(200%);
+  border: 1px solid rgba(189, 8, 28, 0.6);
+  box-shadow:
+    inset 0 0 12px rgba(189, 8, 28, 0.5),
+    0 0 24px rgba(189, 8, 28, 0.7);
+}
+
+/* Dribbble – dark premium pink gradient */
+.icon-content[data-social="dribbble"] a .filled,
+.icon-content[data-social="dribbble"] .tooltip {
+  background: linear-gradient(135deg, #3a0f24, #7a1f4d, #ea4c89, #4a0f2d);
+  background-size: 400% 400%;
+  animation: premiumGradient 6s ease infinite;
+  backdrop-filter: blur(12px) saturate(200%);
+  -webkit-backdrop-filter: blur(12px) saturate(200%);
+  border: 1px solid rgba(234, 76, 137, 0.6);
+  box-shadow:
+    inset 0 0 12px rgba(234, 76, 137, 0.5),
+    0 0 24px rgba(234, 76, 137, 0.7);
+}
+
+/* Telegram – dark premium blue gradient */
+.icon-content[data-social="telegram"] a .filled,
+.icon-content[data-social="telegram"] .tooltip {
+  background: linear-gradient(135deg, #0a1f2d, #0f4a66, #0088cc, #0a2e44);
+  background-size: 400% 400%;
+  animation: premiumGradient 6s ease infinite;
+  backdrop-filter: blur(12px) saturate(200%);
+  -webkit-backdrop-filter: blur(12px) saturate(200%);
+  border: 1px solid rgba(0, 136, 204, 0.6);
+  box-shadow:
+    inset 0 0 12px rgba(0, 136, 204, 0.5),
+    0 0 24px rgba(0, 136, 204, 0.7);
+}
+.gumroad-btn {
+  --bg: #000;
+  --hover-bg: #ff90e8;
+  --hover-text: #000;
+  color: #fff;
+  cursor: pointer;
+  border: 1px solid var(--bg);
+  border-radius: 4px;
+  padding: 0.6em 1.5em; /* Slightly reduced padding for navbar fit */
+  background: var(--bg);
+  transition: 0.2s;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.gumroad-btn:hover {
+  color: var(--hover-text);
+  transform: translate(-0.25rem, -0.25rem);
+  background: var(--hover-bg);
+  box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.gumroad-btn:active {
+  transform: translate(0);
+  box-shadow: none;
+}
+.service-card {
+  width: 250px;
+  height: 325px;
+  background: #f3f4f6;
+  border-radius: 20px;
+  box-shadow: -8px 8px 0px 5px rgb(50, 50, 50, 0.2);
+  border: solid 2px white;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.5s ease;
+  transform: rotate(3deg) skewX(3deg);
+  margin: 1rem auto;
+}
+
+.service-card-top {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s ease;
+  color: #ec4899;
+}
+
+.service-card-bottom {
+  width: 100%;
+  height: 40%;
+  border-end-start-radius: 20px;
+  border-end-end-radius: 20px;
+  background-color: white;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 15px;
+  color: #ec4899;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.service-card-bottom-title {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #1f2937;
+}
+
+.service-card-bottom-desc {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.service-card-bright-filter {
+  width: 450px;
+  height: 200px;
+  background-color: rgb(255, 255, 255, 0.5);
+  position: absolute;
+  transform: rotate(-40deg) translateX(-15%) translateY(-160%);
+  transition: all 0.5s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.service-card-new-filter {
+  width: 75px;
+  height: 30px;
+  border-radius: 25px;
+  background-color: #ec4899;
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.service-card:hover {
+  transform: translateY(-5%);
+  box-shadow: 0px 20px 10px rgb(50, 50, 50, 0.2);
+}
+
+.service-card:hover .service-card-bright-filter {
+  transform: rotate(-42deg) translateX(-15%) translateY(-79%);
+}
+
+.service-card:active .service-card-top {
+  transform: scale(1.05);
+}
+
+.service-card:active .service-card-bottom {
+  background-color: #ec4899;
+  color: white;
+}
+
+.service-card:active .service-card-bottom .service-card-bottom-title,
+.service-card:active .service-card-bottom .service-card-bottom-desc {
+  color: white;
+}
