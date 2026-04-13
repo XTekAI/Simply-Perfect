@@ -1,8 +1,19 @@
 node_modules/
 build/
 dist/
+.next/
 coverage/
 .DS_Store
 *.log
 .env*
 !.env.example
+
+# Next.js auto-generated
+next-env.d.ts
+
+# Source media files (processed images in public/ are committed instead)
+Regalos/
+eventos/
+logos/
+logos.zip
+elisa lopez picture.jpeg

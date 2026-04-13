@@ -30,6 +30,22 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-brand-heading);
 }
 
+/* Dark mode: pink text for all headings and body copy */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: #f9a8d4; /* pink-300 */
+}
+
+.dark body,
+.dark p,
+.dark span,
+.dark li {
+  color: #fce7f3; /* pink-100 — soft, readable */
+}
+
+.dark .uiverse-tooltip-trigger {
+  color: #f9a8d4;
+}
+
 /* Custom Button Style from Uiverse.io by adamgiebl */
 .btn-custom {
   position: relative;
