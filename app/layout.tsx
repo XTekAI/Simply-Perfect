@@ -10,6 +10,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://simplyperfecthn.com'),
   title: 'Simply Perfect Honduras | Creaciones Personalizadas & Eventos',
   description:
     'Creaciones personalizadas, ropa estampada, regalos únicos y organización de eventos en Honduras. Más de 150 clientes felices. Fundada por Elisa López en 2020.',
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
     title: 'Simply Perfect Honduras | Creaciones Personalizadas & Eventos',
     description:
       'Creaciones personalizadas, ropa estampada, regalos únicos y organización de eventos en Honduras.',
+    url: 'https://simplyperfecthn.com',
     locale: 'es_HN',
     type: 'website',
     siteName: 'Simply Perfect Honduras',
@@ -35,11 +37,11 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'LocalBusiness',
-      '@id': 'https://simplyperfect.com/#business',
+      '@id': 'https://simplyperfecthn.com/#business',
       name: 'Simply Perfect Honduras',
       description:
         'Creaciones personalizadas, ropa estampada, regalos únicos y organización de eventos en Honduras.',
-      url: 'https://simplyperfect.com',
+      url: 'https://simplyperfecthn.com',
       email: 'Simplyperfect.lce@gmail.com',
       foundingDate: '2020',
       areaServed: { '@type': 'Country', name: 'Honduras' },
@@ -63,8 +65,8 @@ const jsonLd = {
     },
     {
       '@type': 'WebSite',
-      '@id': 'https://simplyperfect.com/#website',
-      url: 'https://simplyperfect.com',
+      '@id': 'https://simplyperfecthn.com/#website',
+      url: 'https://simplyperfecthn.com',
       name: 'Simply Perfect Honduras',
       inLanguage: 'es-HN',
     },

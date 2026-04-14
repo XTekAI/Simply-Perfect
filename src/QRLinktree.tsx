@@ -4,8 +4,8 @@ import { motion } from 'motion/react';
 const links = [
   {
     label: 'Visita nuestro sitio web',
-    sublabel: 'simplyperfect.com',
-    href: 'https://simplyperfect.com',
+    sublabel: 'simplyperfecthn.com',
+    href: 'https://simplyperfecthn.com',
     iconBg: 'bg-pink-400/30',
     iconColor: '#f9a8d4',
     icon: (
