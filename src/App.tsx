@@ -648,6 +648,17 @@ const Footer = () => {
           <a href="/terminos" target="_blank" rel="noopener noreferrer" className="gumroad-btn">Términos</a>
         </div>
       </div>
+      <div className="mt-8 pt-6 border-t border-gray-800 text-center">
+        <a
+          href="https://www.xtekai.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-xs text-gray-600 hover:text-gray-400 transition-colors duration-200"
+        >
+          <span>Diseñado y desarrollado por</span>
+          <span className="font-semibold tracking-wide text-gray-400 hover:text-white transition-colors">XTekAI</span>
+        </a>
+      </div>
     </footer>
   );
 };
