@@ -70,7 +70,7 @@ export default function Privacidad() {
               </p>
               <p>
                 <span className="font-medium">WhatsApp: </span>
-                <a href="https://wa.link/4ylqr2" target="_blank" rel="noopener noreferrer" className="text-teal-500 hover:underline">
+                <a href="https://wa.link/okweei" target="_blank" rel="noopener noreferrer" className="text-teal-500 hover:underline">
                   Escríbenos
                 </a>
               </p>

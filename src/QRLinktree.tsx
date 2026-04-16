@@ -33,7 +33,7 @@ const links = [
   {
     label: 'Escríbenos por WhatsApp',
     sublabel: 'Chatea con nosotros',
-    href: 'https://wa.link/4ylqr2',
+    href: 'https://wa.link/okweei',
     iconBg: 'bg-teal-400/30',
     iconColor: '#5eead4',
     icon: (

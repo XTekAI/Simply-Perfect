@@ -33,6 +33,15 @@ const Navbar = () => {
     { name: 'Contacto',  href: '#contacto' },
   ];
 
+  const handleMobileNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsMobileMenuOpen(false);
+    setTimeout(() => {
+      const id = href.replace('#', '');
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -92,7 +101,7 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   className="text-gray-600 dark:text-pink-300 hover:text-pink-500 dark:hover:text-pink-400 py-2 block font-medium"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => handleMobileNav(e, link.href)}
                 >
                   {link.name}
                 </a>
@@ -525,7 +534,7 @@ const Contact = () => {
 
               <div className="uiverse-tooltip-container">
                 <span className="uiverse-tooltip-trigger">
-                  <a href="https://wa.link/4ylqr2" target="_blank" rel="noopener noreferrer" className="p-2 bg-teal-50 rounded-full text-teal-500 block"><Phone size={20} /></a>
+                  <a href="https://wa.link/okweei" target="_blank" rel="noopener noreferrer" className="p-2 bg-teal-50 rounded-full text-teal-500 block"><Phone size={20} /></a>
                   <span className="text-sm font-medium dark:text-pink-300">WhatsApp</span>
                 </span>
                 <span className="uiverse-tooltip-content">Escríbenos por WhatsApp</span>
@@ -551,7 +560,7 @@ const Contact = () => {
             {/* WhatsApp CTA */}
             <div className="mt-8">
               <a
-                href="https://wa.link/4ylqr2"
+                href="https://wa.link/okweei"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-semibold transition-colors shadow-md shadow-emerald-200 dark:shadow-emerald-900/30"
