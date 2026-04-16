@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Star, Gift, Calendar, Palette, Shirt, Coffee, PartyPopper, Mail, Phone, Instagram, Facebook } from 'lucide-react';
+import { Menu, X, Star, Gift, Calendar, Palette, Coffee, PartyPopper, Mail, Phone, Instagram, Facebook } from 'lucide-react';
 import Hero from './components/ui/hero-alternative';
 import Gallery from './components/ui/Gallery';
 
@@ -196,22 +196,6 @@ const serviceDetails: ServiceDetail[] = [
     note: '⚠️ Se requiere el pago del 100% por adelantado para confirmar y comenzar tu pedido.',
   },
   {
-    title: 'Ropa Personalizada',
-    icon: <Shirt size={36} />,
-    accent: 'pink',
-    tagline: 'Tu estilo, tu diseño, tu identidad',
-    description:
-      'Camisetas, gorras, sudaderas y más, diseñados exclusivamente para ti, tu familia, equipo o empresa. Usamos técnicas de sublimación y DTF para garantizar diseños nítidos, colores intensos y larga durabilidad. Ideales para reuniones familiares, equipos deportivos, eventos empresariales y regalos especiales.',
-    includes: [
-      'Camisetas, gorras, sudaderas y más',
-      'Impresión por sublimación o DTF',
-      'Sin mínimo de piezas para pedidos personales',
-      'Descuentos por volumen para pedidos corporativos',
-      'Diseño personalizado incluido',
-    ],
-    note: '⚠️ Se requiere el pago del 100% por adelantado para confirmar y comenzar tu pedido.',
-  },
-  {
     title: 'Regalos Únicos',
     icon: <Gift size={36} />,
     accent: 'pink',
@@ -355,9 +339,8 @@ const Services = () => {
   const [activeService, setActiveService] = useState<ServiceDetail | null>(null);
 
   const products = [
-    { icon: <Coffee size={32} />, title: "Tazas Personalizadas",    desc: "Comienza tu día con un toque único y personal." },
-    { icon: <Shirt size={32} />,  title: "Ropa Personalizada",      desc: "Camisetas, gorras y sudaderas diseñadas para ti." },
-    { icon: <Gift size={32} />,   title: "Regalos Únicos",          desc: "Artículos personalizados para cualquier ocasión." },
+    { icon: <Coffee size={32} />, title: "Tazas Personalizadas", desc: "Comienza tu día con un toque único y personal." },
+    { icon: <Gift size={32} />,   title: "Regalos Únicos",       desc: "Artículos personalizados para cualquier ocasión." },
   ];
 
   const events = [
@@ -613,10 +596,10 @@ const Contact = () => {
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Tipo de Servicio</label>
               <select className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base">
-                <option>Ropa Personalizada</option>
-                <option>Organización de Eventos</option>
-                <option>Regalos Únicos</option>
                 <option>Tazas Personalizadas</option>
+                <option>Regalos Únicos</option>
+                <option>Organización de Eventos</option>
+                <option>Diseño de Decoración</option>
                 <option>Souvenirs y Detalles</option>
                 <option>Otro</option>
               </select>

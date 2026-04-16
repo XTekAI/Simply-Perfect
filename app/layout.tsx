@@ -51,7 +51,6 @@ const jsonLd = {
         name: 'Servicios Simply Perfect',
         itemListElement: [
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Tazas Personalizadas' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Ropa Personalizada' } },
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Regalos Únicos' } },
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Organización de Eventos' } },
           { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Diseño de Decoración' } },
