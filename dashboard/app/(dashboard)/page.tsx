@@ -232,7 +232,7 @@ export default function ResumenPage() {
               tickFormatter={(v) => `L${(v / 1000).toFixed(0)}k`}
             />
             <Tooltip
-              formatter={(value: number) => formatMoney(value)}
+              formatter={(value) => formatMoney(Number(value ?? 0))}
               contentStyle={{ borderRadius: 12, border: "1px solid #f3f4f6" }}
             />
             <Line type="monotone" dataKey="Ingresos" stroke="#14b8a6" strokeWidth={2.5} dot={{ r: 3 }} />
@@ -260,7 +260,7 @@ export default function ResumenPage() {
                   stroke="currentColor"
                   className="text-gray-500"
                 />
-                <Tooltip formatter={(value: number) => formatMoney(value)} />
+                <Tooltip formatter={(value) => formatMoney(Number(value ?? 0))} />
                 <Bar dataKey="value" fill="#f472b6" radius={[0, 8, 8, 0]} />
               </BarChart>
             </ResponsiveContainer>
