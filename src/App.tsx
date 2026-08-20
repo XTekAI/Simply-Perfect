@@ -567,7 +567,9 @@ const Contact = () => {
     correo: '',
     telefono: '',
     fechaEvento: '',
-    tipoServicio: 'Tazas Personalizadas',
+    tipoEvento: 'Boda Civil',
+    numeroInvitados: '',
+    lugarEvento: '',
     mensaje: '',
     consentimientoContacto: false,
   });
@@ -599,7 +601,9 @@ const Contact = () => {
         correo: '',
         telefono: '',
         fechaEvento: '',
-        tipoServicio: 'Tazas Personalizadas',
+        tipoEvento: 'Boda Civil',
+        numeroInvitados: '',
+        lugarEvento: '',
         mensaje: '',
         consentimientoContacto: false,
       });
@@ -704,20 +708,33 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Tipo de Servicio</label>
-              <select name="tipoServicio" value={formData.tipoServicio} onChange={handleChange} className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base">
-                <option>Tazas Personalizadas</option>
-                <option>Regalos Únicos</option>
-                <option>Organización de Eventos</option>
-                <option>Diseño de Decoración</option>
-                <option>Souvenirs y Detalles</option>
-                <option>Otro</option>
-              </select>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Tipo de Evento</label>
+                <select name="tipoEvento" value={formData.tipoEvento} onChange={handleChange} className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base">
+                  <option>Boda Civil</option>
+                  <option>Boda Religiosa</option>
+                  <option>Quince Años</option>
+                  <option>Cumpleaños</option>
+                  <option>Baby Shower</option>
+                  <option>Bautizo</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Número de Invitados</label>
+                <input name="numeroInvitados" value={formData.numeroInvitados} onChange={handleChange} type="number" min="1" className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="Ej. 100" />
+              </div>
             </div>
+
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Mensaje</label>
-              <textarea name="mensaje" value={formData.mensaje} onChange={handleChange} required rows={4} className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+              <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Lugar del Evento</label>
+              <input name="lugarEvento" value={formData.lugarEvento} onChange={handleChange} type="text" className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="Salón, hotel, casa, dirección..." />
+            </div>
+
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Cuéntanos sobre tu evento</label>
+              <textarea name="mensaje" value={formData.mensaje} onChange={handleChange} required rows={4} className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="Cuéntanos sobre la decoración que imaginas (tema playero, elegante, infantil, etc.) y cualquier otro detalle de tu evento..."></textarea>
             </div>
             <div className="mb-6 flex items-start gap-3">
               <input
