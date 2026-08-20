@@ -20,21 +20,28 @@ export default function Terminos() {
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">2. Pedidos y cotizaciones</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">2. Consentimiento de contacto</h2>
+            <p>
+              Al enviar el formulario de contacto de nuestro sitio web, autorizas a Simply Perfect a contactarte por llamada telefónica, mensaje de texto (SMS), correo electrónico o WhatsApp para dar seguimiento a tu solicitud, cotización o pedido. Esta autorización es necesaria para poder atender tu consulta y puedes retirarla en cualquier momento contactándonos por los medios indicados en la sección 10.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">3. Pedidos y cotizaciones</h2>
             <p>
               Todos los pedidos se confirman únicamente con el pago completo por adelantado. Una cotización tiene validez de 7 días calendario desde su emisión. Simply Perfect se reserva el derecho de ajustar precios ante cambios significativos en costos de materiales.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">3. Plazos de entrega</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">4. Plazos de entrega</h2>
             <p>
               Los tiempos de producción y entrega se acuerdan al momento de confirmar el pedido. Simply Perfect hará su mejor esfuerzo para cumplir con los plazos establecidos. Retrasos por causas de fuerza mayor (desastres naturales, problemas de suministro, etc.) serán comunicados oportunamente.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">4. Política de pagos</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">5. Política de pagos</h2>
             <p className="font-semibold text-gray-900 mb-2">
               Para todos nuestros servicios y productos se requiere el pago del 100% por adelantado para confirmar el pedido o reservar la fecha del evento.
             </p>
@@ -48,35 +55,35 @@ export default function Terminos() {
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">5. Cancelaciones y reembolsos</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">6. Cancelaciones y reembolsos</h2>
             <p>
               Una vez realizado el pago y confirmado el pedido, no se aceptan cancelaciones ni reembolsos. Si el error es atribuible a Simply Perfect (defecto de fabricación o error en el diseño previamente aprobado), se repondrá el producto sin costo adicional. El cliente es responsable de revisar y aprobar el diseño antes de que se inicie la producción.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">6. Propiedad intelectual</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">7. Propiedad intelectual</h2>
             <p>
               Los diseños creados por Simply Perfect son propiedad de la empresa hasta que se realice el pago completo. El cliente garantiza tener los derechos sobre cualquier imagen, logo o material que proporcione para la personalización.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">7. Limitación de responsabilidad</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">8. Limitación de responsabilidad</h2>
             <p>
               Simply Perfect no se hace responsable por daños indirectos, pérdidas de ingresos ni perjuicios derivados del uso de los productos adquiridos. Nuestra responsabilidad máxima se limita al valor del pedido en cuestión.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">8. Modificaciones</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">9. Modificaciones</h2>
             <p>
               Simply Perfect se reserva el derecho de actualizar estos términos en cualquier momento. Los cambios serán publicados en este sitio web con la fecha de actualización correspondiente.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">9. Contacto</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">10. Contacto</h2>
             <p>Para cualquier consulta sobre estos términos, contáctanos:</p>
             <div className="mt-3 space-y-1">
               <p>

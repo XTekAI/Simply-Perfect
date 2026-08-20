@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Star, Gift, Calendar, Palette, Coffee, PartyPopper, Mail, Phone, Instagram, Facebook } from 'lucide-react';
+import { Menu, X, Star, Gift, Calendar, Palette, Coffee, PartyPopper, Mail, Phone, Instagram, Facebook, CheckCircle2 } from 'lucide-react';
 import Hero from './components/ui/hero-alternative';
 import Gallery from './components/ui/Gallery';
 
@@ -507,7 +507,108 @@ const Reviews = () => {
   );
 };
 
+const LEAD_WEBHOOK_URL = 'https://prueba1-n8n.fihoy6.easypanel.host/webhook/sp-captura-lead';
+
+const SuccessModal = ({ onSendAnother, onClose }: { onSendAnother: () => void; onClose: () => void }) => (
+  <AnimatePresence>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.92, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.92, opacity: 0, y: 20 }}
+        transition={{ duration: 0.28 }}
+        className="relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden text-center"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="px-8 pt-10 pb-8">
+          <div className="w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-5 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-500">
+            <CheckCircle2 size={34} />
+          </div>
+          <h3 className="font-serif font-bold text-2xl text-gray-900 dark:text-pink-200 mb-2">¡Formulario enviado!</h3>
+          <p className="text-gray-600 dark:text-pink-200/80 text-sm leading-relaxed mb-8">
+            Gracias por escribirnos. Recibimos tu mensaje y te contactaremos muy pronto.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={onSendAnother}
+              className="flex-1 btn-custom justify-center text-sm py-3"
+            >
+              Enviar otro mensaje
+            </button>
+            <button
+              onClick={onClose}
+              className="px-4 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-700 text-gray-500 dark:text-pink-300 hover:border-pink-300 transition-colors text-sm font-medium"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 rounded-full w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors shadow-sm"
+        >
+          <X size={16} />
+        </button>
+      </motion.div>
+    </motion.div>
+  </AnimatePresence>
+);
+
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    nombre: '',
+    correo: '',
+    telefono: '',
+    fechaEvento: '',
+    tipoServicio: 'Tazas Personalizadas',
+    mensaje: '',
+    consentimientoContacto: false,
+  });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target;
+    if (type === 'checkbox') {
+      const { checked } = e.target as HTMLInputElement;
+      setFormData((prev) => ({ ...prev, [name]: checked }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('sending');
+    try {
+      const response = await fetch(LEAD_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) throw new Error('Respuesta no exitosa');
+      setStatus('success');
+      setFormData({
+        nombre: '',
+        correo: '',
+        telefono: '',
+        fechaEvento: '',
+        tipoServicio: 'Tazas Personalizadas',
+        mensaje: '',
+        consentimientoContacto: false,
+      });
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+      setStatus('error');
+    }
+  };
+
   return (
     <section id="contacto" className="py-24 bg-stone-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -574,6 +675,7 @@ const Contact = () => {
           </motion.div>
 
           <motion.form
+            onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -583,28 +685,28 @@ const Contact = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Nombre</label>
-                <input type="text" className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="Tu nombre" />
+                <input name="nombre" value={formData.nombre} onChange={handleChange} required type="text" className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="Tu nombre" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Correo</label>
-                <input type="email" className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="Simplyperfect.lce@gmail.com" />
+                <input name="correo" value={formData.correo} onChange={handleChange} required type="email" className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="Simplyperfect.lce@gmail.com" />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Teléfono / WhatsApp</label>
-                <input type="tel" className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="+504 0000-0000" />
+                <input name="telefono" value={formData.telefono} onChange={handleChange} required type="tel" className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="+504 0000-0000" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Fecha del Evento (Opcional)</label>
-                <input type="date" className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" />
+                <input name="fechaEvento" value={formData.fechaEvento} onChange={handleChange} type="date" className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" />
               </div>
             </div>
 
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Tipo de Servicio</label>
-              <select className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base">
+              <select name="tipoServicio" value={formData.tipoServicio} onChange={handleChange} className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base">
                 <option>Tazas Personalizadas</option>
                 <option>Regalos Únicos</option>
                 <option>Organización de Eventos</option>
@@ -615,14 +717,38 @@ const Contact = () => {
             </div>
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 dark:text-pink-300 mb-2">Mensaje</label>
-              <textarea rows={4} className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+              <textarea name="mensaje" value={formData.mensaje} onChange={handleChange} required rows={4} className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-pink-200 focus:border-pink-300 outline-none transition-all text-base" placeholder="Cuéntanos sobre tu proyecto..."></textarea>
             </div>
-            <button className="w-full btn-custom justify-center">
-              Enviar Mensaje
+            <div className="mb-6 flex items-start gap-3">
+              <input
+                id="consentimientoContacto"
+                name="consentimientoContacto"
+                type="checkbox"
+                checked={formData.consentimientoContacto}
+                onChange={handleChange}
+                required
+                className="mt-1 w-4 h-4 flex-shrink-0 rounded border-gray-300 dark:border-gray-600 text-pink-500 focus:ring-pink-300"
+              />
+              <label htmlFor="consentimientoContacto" className="text-sm text-gray-600 dark:text-pink-200/80 leading-relaxed">
+                Acepto ser contactado/a por llamada, mensaje de texto (SMS), correo electrónico o WhatsApp sobre esta solicitud, de acuerdo con la{' '}
+                <a href="/privacidad" target="_blank" rel="noopener noreferrer" className="text-pink-500 hover:underline">Política de Privacidad</a>
+                {' '}y los{' '}
+                <a href="/terminos" target="_blank" rel="noopener noreferrer" className="text-pink-500 hover:underline">Términos y Condiciones</a>.
+              </label>
+            </div>
+            <button type="submit" disabled={status === 'sending'} className="w-full btn-custom justify-center disabled:opacity-60 disabled:cursor-not-allowed">
+              {status === 'sending' ? 'Enviando...' : 'Enviar Mensaje'}
             </button>
+            {status === 'error' && (
+              <p className="mt-4 text-center text-sm font-medium text-red-500">Hubo un error al enviar tu mensaje. Intenta de nuevo o escríbenos por WhatsApp.</p>
+            )}
           </motion.form>
         </div>
       </div>
+
+      {status === 'success' && (
+        <SuccessModal onSendAnother={() => setStatus('idle')} onClose={() => setStatus('idle')} />
+      )}
     </section>
   );
 };

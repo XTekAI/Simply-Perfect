@@ -31,35 +31,42 @@ export default function Privacidad() {
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">3. Compartir información con terceros</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">3. Consentimiento para ser contactado</h2>
+            <p>
+              Al completar y enviar el formulario de contacto de nuestro sitio web, autorizas expresamente a Simply Perfect a contactarte por llamada telefónica, mensaje de texto (SMS), correo electrónico o WhatsApp en relación con tu solicitud, cotización o pedido. Este consentimiento aplica únicamente a comunicaciones relacionadas con tu consulta y no implica la suscripción a listas de mercadeo masivo. Puedes retirar tu consentimiento en cualquier momento escribiéndonos a los medios indicados en la sección 8.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">4. Compartir información con terceros</h2>
             <p>
               Simply Perfect no vende, alquila ni comparte tu información personal con terceros con fines comerciales. Tus datos son tratados de forma confidencial y solo son accesibles por el equipo de Simply Perfect.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">4. Redes sociales</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">5. Redes sociales</h2>
             <p>
               Cuando interactúas con nosotros en Instagram o Facebook, esas plataformas tienen sus propias políticas de privacidad. Te recomendamos revisarlas directamente en cada plataforma.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">5. Seguridad de los datos</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">6. Seguridad de los datos</h2>
             <p>
               Tomamos medidas razonables para proteger tu información personal. Sin embargo, ningún método de transmisión por Internet es 100% seguro. Hacemos nuestro mejor esfuerzo para proteger tus datos.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">6. Tus derechos</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">7. Tus derechos</h2>
             <p>
               Tienes derecho a solicitar el acceso, corrección o eliminación de tu información personal en cualquier momento. Para hacerlo, contáctanos directamente.
             </p>
           </section>
 
           <section>
-            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">7. Contacto</h2>
+            <h2 className="font-serif font-semibold text-2xl text-gray-800 mb-3">8. Contacto</h2>
             <p>Si tienes preguntas sobre esta política, puedes escribirnos a:</p>
             <div className="mt-3 space-y-1">
               <p>
