@@ -28,33 +28,55 @@ export function useRealtimeTable<T extends { id: string }>(
     }
     load();
 
-    const channel = supabase
-      .channel(`${table}-live`)
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table },
-        (payload) => {
-          setRows((current) => {
-            if (payload.eventType === "INSERT") {
-              return [payload.new as T, ...current];
-            }
-            if (payload.eventType === "UPDATE") {
-              return current.map((r) =>
-                r.id === (payload.new as T).id ? (payload.new as T) : r
-              );
-            }
-            if (payload.eventType === "DELETE") {
-              return current.filter((r) => r.id !== (payload.old as T).id);
-            }
-            return current;
-          });
-        }
-      )
-      .subscribe();
+    // Realtime necesita el token de sesion del usuario para que la politica
+    // RLS ("solo autenticados") permita entregar los eventos - sin esto la
+    // suscripcion "funciona" pero nunca llega ningun evento.
+    async function setupChannel() {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      // Si el efecto ya se limpio mientras esperabamos la sesion (React
+      // StrictMode en desarrollo ejecuta el efecto dos veces), no crear
+      // el canal - evita suscribirse dos veces al mismo nombre de canal.
+      if (!active) return null;
+      if (session) {
+        supabase.realtime.setAuth(session.access_token);
+      }
+
+      const channel = supabase
+        .channel(`${table}-live`)
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table },
+          (payload) => {
+            setRows((current) => {
+              if (payload.eventType === "INSERT") {
+                return [payload.new as T, ...current];
+              }
+              if (payload.eventType === "UPDATE") {
+                return current.map((r) =>
+                  r.id === (payload.new as T).id ? (payload.new as T) : r
+                );
+              }
+              if (payload.eventType === "DELETE") {
+                return current.filter((r) => r.id !== (payload.old as T).id);
+              }
+              return current;
+            });
+          }
+        )
+        .subscribe();
+
+      return channel;
+    }
+
+    const channelPromise = setupChannel();
 
     return () => {
       active = false;
-      supabase.removeChannel(channel);
+      channelPromise.then((channel) => {
+        if (channel) supabase.removeChannel(channel);
+      });
     };
   }, [table, order]);
 
