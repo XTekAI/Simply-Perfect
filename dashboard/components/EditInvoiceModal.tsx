@@ -37,6 +37,33 @@ export function EditInvoiceModal({ tabla, invoice, onClose }: Props) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // ISV general en Honduras. Al cambiar el Subtotal, se sugiere el Tax al
+  // 15% automaticamente (ella lo puede corregir a mano si es un caso exento
+  // o con otra tasa), y el Total siempre se recalcula como subtotal + tax.
+  const ISV_HONDURAS = 0.15;
+
+  function recomputeTotal(nuevoSubtotal: string, nuevoTax: string) {
+    const s = parseFloat(nuevoSubtotal);
+    const t = parseFloat(nuevoTax);
+    if (!isNaN(s) || !isNaN(t)) {
+      const suma = (isNaN(s) ? 0 : s) + (isNaN(t) ? 0 : t);
+      setTotal(suma.toFixed(2));
+    }
+  }
+
+  function handleSubtotalChange(value: string) {
+    setSubtotal(value);
+    const s = parseFloat(value);
+    const taxSugerido = isNaN(s) ? "" : (s * ISV_HONDURAS).toFixed(2);
+    setTax(taxSugerido);
+    recomputeTotal(value, taxSugerido);
+  }
+
+  function handleTaxChange(value: string) {
+    setTax(value);
+    recomputeTotal(subtotal, value);
+  }
+
   async function handleSave() {
     setSaving(true);
     setError(null);
@@ -140,7 +167,7 @@ export function EditInvoiceModal({ tabla, invoice, onClose }: Props) {
                 type="number"
                 step="0.01"
                 value={subtotal}
-                onChange={(e) => setSubtotal(e.target.value)}
+                onChange={(e) => handleSubtotalChange(e.target.value)}
                 className={inputClass}
               />
             </Field>
@@ -149,7 +176,7 @@ export function EditInvoiceModal({ tabla, invoice, onClose }: Props) {
                 type="number"
                 step="0.01"
                 value={tax}
-                onChange={(e) => setTax(e.target.value)}
+                onChange={(e) => handleTaxChange(e.target.value)}
                 className={inputClass}
               />
             </Field>
