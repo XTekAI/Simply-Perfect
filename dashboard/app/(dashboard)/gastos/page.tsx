@@ -1,12 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ExternalLink, Check, Loader2 } from "lucide-react";
+import { ExternalLink, Check, Loader2, Pencil } from "lucide-react";
 import { useRealtimeTable } from "@/lib/hooks/useRealtimeTable";
 import { Gasto } from "@/lib/types";
 import { formatMoney, formatDate } from "@/lib/format";
 import { Card, EstadoBadge, ConfianzaBadge } from "@/components/ui";
 import { marcarRevisado } from "@/lib/n8n";
+import { EditInvoiceModal } from "@/components/EditInvoiceModal";
 
 type Filtro = "todos" | "no_revisado" | "revisado";
 
@@ -14,6 +15,7 @@ export default function GastosPage() {
   const { rows, loading } = useRealtimeTable<Gasto>("sp_gastos");
   const [filtro, setFiltro] = useState<Filtro>("todos");
   const [marcando, setMarcando] = useState<string | null>(null);
+  const [editando, setEditando] = useState<Gasto | null>(null);
 
   const filtrados = useMemo(() => {
     if (filtro === "todos") return rows;
@@ -117,6 +119,13 @@ export default function GastosPage() {
                         >
                           <ExternalLink size={16} />
                         </a>
+                        <button
+                          onClick={() => setEditando(g)}
+                          className="p-1.5 text-gray-400 hover:text-pink-500 transition-colors"
+                          title="Corregir datos"
+                        >
+                          <Pencil size={16} />
+                        </button>
                         {g.estado_revision !== "revisado" && (
                           <button
                             onClick={() => handleMarcar(g.id)}
@@ -140,6 +149,10 @@ export default function GastosPage() {
           </div>
         )}
       </Card>
+
+      {editando && (
+        <EditInvoiceModal tabla="gastos" invoice={editando} onClose={() => setEditando(null)} />
+      )}
     </div>
   );
 }
