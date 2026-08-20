@@ -2,7 +2,17 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, Receipt, TrendingUp, Users, LogOut, Menu, X } from "lucide-react";
+import {
+  LayoutDashboard,
+  Receipt,
+  TrendingUp,
+  Users,
+  LogOut,
+  Menu,
+  X,
+  UploadCloud,
+  FileSpreadsheet,
+} from "lucide-react";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ThemeToggle } from "./ThemeToggle";
@@ -12,6 +22,24 @@ const NAV = [
   { href: "/gastos", label: "Gastos", icon: Receipt },
   { href: "/ingresos", label: "Ingresos", icon: TrendingUp },
   { href: "/leads", label: "Leads", icon: Users },
+];
+
+const ACCESOS_RAPIDOS = [
+  {
+    href: "https://drive.google.com/drive/folders/1CX5DuhwQpxlKKkymRR5saCW0T3s7LH9I",
+    label: "Subir gasto",
+    icon: UploadCloud,
+  },
+  {
+    href: "https://drive.google.com/drive/folders/1WLXu5bEAqW43i2WCZESfQZAg9QteHS07",
+    label: "Subir ingreso",
+    icon: UploadCloud,
+  },
+  {
+    href: "https://docs.google.com/spreadsheets/d/1n7fa1z8VmI-JQ8fkPZkfvaJVSLVfT_hL9D7JowdK4E4/edit",
+    label: "Ver Google Sheet",
+    icon: FileSpreadsheet,
+  },
 ];
 
 export function Sidebar({ userEmail }: { userEmail: string }) {
@@ -57,6 +85,26 @@ export function Sidebar({ userEmail }: { userEmail: string }) {
           );
         })}
       </nav>
+
+      <div className="px-4 pt-4 pb-2 border-t border-gray-100 dark:border-gray-800">
+        <p className="px-4 mb-2 text-[10px] font-semibold tracking-widest uppercase text-gray-400 dark:text-pink-300/40">
+          Accesos rápidos
+        </p>
+        <div className="space-y-1">
+          {ACCESOS_RAPIDOS.map(({ href, label, icon: Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 dark:text-pink-200/70 dark:hover:bg-gray-900 transition-colors"
+            >
+              <Icon size={17} />
+              {label}
+            </a>
+          ))}
+        </div>
+      </div>
 
       <div className="px-4 pb-6 pt-4 border-t border-gray-100 dark:border-gray-800">
         <div className="flex items-center justify-between px-2 mb-3">
